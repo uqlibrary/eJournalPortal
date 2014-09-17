@@ -3,7 +3,7 @@
  */
 
 
-window.onload = function() {
+function init() {
   // Add availability link to all resources
   var rows = document.getElementsByClassName('SS_Holding');
   var issnSearchUrl = 'https://library.uq.edu.au/search~S1/?searchtype=i&searcharg=';
@@ -15,11 +15,12 @@ window.onload = function() {
     if(typeof(rows[i].children) != 'undefined') {
       for(var j=0; j < rows[i].children.length; j++) {
 
+
         if(rows[i].children[j].className == "SS_JournalISSN") {
-          journalISSN = rows[i].children[j].innerText.replace('(','').replace(')','');
+          journalISSN = rows[i].children[j].textContent.trim().replace('(','').replace(')','');
         }
         if(rows[i].children[j].className == "SS_JournalTitle") {
-          journalTitle = rows[i].children[j].innerText;
+          journalTitle = rows[i].children[j].textContent.trim();
         }
       }
 
@@ -49,3 +50,6 @@ window.onload = function() {
   }
 
 };
+if (document.addEventListener) {
+  document.addEventListener("DOMContentLoaded", init, false);
+}
